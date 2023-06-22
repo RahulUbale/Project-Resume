@@ -13,6 +13,25 @@ nav_order: 1
 {%- for y in page.years %}
   <h2 class="year">{{y}}</h2>
   {% bibliography -f {{ site.scholar.bibliography }} -q @*[year={{y}}]* %}
+  {%- assign publications = site.data.publications | where: "year", y %}
+  {%- for publication in publications %}
+    <div class="publication">
+      <h3>{{ publication.title }}</h3>
+      <div class="altmetric-embed" data-badge-type="donut" data-badge-details="right" data-handle="{{ publication.altmetric }}"></div>
+    </div>
+  {%- endfor %}
 {% endfor %}
 
+</div>
+
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="categoryDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Select Category
+  </button>
+  <div class="dropdown-menu" aria-labelledby="categoryDropdown">
+    <a class="dropdown-item" href="#category1">Category 1</a>
+    <a class="dropdown-item" href="#category2">Category 2</a>
+    <a class="dropdown-item" href="#category3">Category 3</a>
+    <!-- Add more categories as needed -->
+  </div>
 </div>
