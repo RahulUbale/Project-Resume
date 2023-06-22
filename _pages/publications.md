@@ -25,7 +25,8 @@ nav_order: 1
   </button>
   <div class="dropdown-menu" aria-labelledby="categoryDropdown">
     <a class="dropdown-item" href="{{ page.url }}#books">Books</a>
-    <!-- Add more categories as needed -->
+    <a class="dropdown-item" href="{{ page.url }}#aps">APS</a>
+    <!-- Add more @string options as needed -->
   </div>
 </div>
 
@@ -35,6 +36,16 @@ nav_order: 1
     {%- if publications.size > 0 %}
       <h2 class="year">{{y}}</h2>
       {% bibliography -f {{ site.scholar.bibliography }} -q @*[year={{y}}]* -t book %}
+    {%- endif %}
+  {% endfor %}
+</div>
+
+<div id="aps" class="publications">
+  {%- for y in page.years %}
+    {%- assign publications = site.data.publications | where: "year", y | where: "publisher", "American Physical Society," %}
+    {%- if publications.size > 0 %}
+      <h2 class="year">{{y}}</h2>
+      {% bibliography -f {{ site.scholar.bibliography }} -q @*[year={{y}}]* -t article %}
     {%- endif %}
   {% endfor %}
 </div>
