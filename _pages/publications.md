@@ -1,16 +1,3 @@
-<style>
-.altmetric-embed {
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.publication:hover .altmetric-embed {
-  display: block;
-}
-</style>
-
 ---
 layout: page
 permalink: /publications/
@@ -26,15 +13,6 @@ nav_order: 1
 {%- for y in page.years %}
   <h2 class="year">{{y}}</h2>
   {% bibliography -f {{ site.scholar.bibliography }} -q @*[year={{y}}]* %}
-  {%- assign publications = site.scholar.bibliography | where_exp:"item", "item.year == y" %}
-  {%- for publication in publications %}
-    <div class="publication">
-      <h3>{{ publication.title }}</h3>
-      <!-- Add Altmetric badge code here -->
-      <div class="altmetric-embed" data-handle="{{ publication.altmetric }}"></div>
-    </div>
-  {%- endfor %}
 {% endfor %}
-
 
 </div>
